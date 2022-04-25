@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
@@ -31,27 +33,52 @@ const pokedex = [
     tipo: "Water",
     imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png",
   },
+  {
+    id: 4,
+    nome: "Pikachu",
+    descricao:
+      "Pikachu that can generate powerful electricity have cheek sacs that are extra soft and super stretchy.",
+    tipo: "Eletric",
+    imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
+  },
 ];
 
-// app.set("view engine", "ejs");
+let pokemon = undefined;
 
+// Rotas
 app.get("/", (req, res) => {
-  res.render("index", { pokedex });
+  res.render("index", { pokedex, pokemon });
 });
 
-app.post("/add", (req, res) => {
+app.post("/create", (req, res) => {
   const pokemon = req.body;
+  pokemon.id = pokedex.length + 1;
   pokedex.push(pokemon);
-
-
-  res.redirect("/");
+  res.redirect("/#cards");
 });
 
-//Rotas
-app.get("/home", (req, res) => {
-  res.send("Olá mundo do Express");
+app.get("/detalhes/:id", (req, res) => {
+  const id = +req.params.id;
+  pokemon = pokedex.find((pokemon) => pokemon.id === id);
+  res.redirect("/#cadastro");
 });
 
-app.listen(3000, () =>
-  console.log("Servidor rodando em http://localhost:3000")
+app.post("/update/:id", (req, res) => {
+  const id = +req.params.id - 1;
+  const newPokemon = req.body;
+  newPokemon.id = id + 1;
+  pokedex[id] = newPokemon;
+  pokemon = undefined;
+  res.redirect("/#cards");
+});
+
+app.get("/delete/:id", (req, res) => {
+  const id = +req.params.id - 1;
+  delete pokedex[id];
+
+  res.redirect("/#cards");
+});
+
+app.listen(port, () =>
+  console.log(`Servidor rodando em http://localhost:${port}`)
 );
