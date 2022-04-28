@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/magura13/mod_02_proj_02_pokedex#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
     "nodemon": "^2.0.15"
