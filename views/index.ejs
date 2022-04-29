@@ -9,33 +9,30 @@
   </head>
   <body>
     <nav>
-<ul>
-  <li><h1>Pokedex</h1></li>
-  <li><a href="#cadastro">Register</a></li>
-  <li><a href="#cards">Pokemons</a></li>
-</ul>
-
+      <ul>
+        <li><h1>Pokedex</h1></li>
+        <li><a href="#cadastro">Register</a></li>
+        <li><a href="#cards">Pokemons</a></li>
+      </ul>
     </nav>
-      
 
     <main>
-
       <section id="cadastro">
         <% if (pokemon == undefined) { %>
         <h2>Register a new pokemon</h2>
 
-        <form action="/create" method="post">
+        <form action="/create" onsubmit="cadastrado()" method="post">
           <label for="nome">Name:</label>
-          <input type="text" id="nome" name="nome" />
+          <input required type="text" id="nome" name="nome" />
 
           <label for="descricao">Description:</label>
-          <input type="text" name="descricao" id="descricao" />
+          <input required type="text" name="descricao" id="descricao" />
 
           <label for="tipo">Type:</label>
-          <input type="text" name="tipo" id="tipo" />
+          <input required type="text" name="tipo" id="tipo" />
 
           <label for="imagem">Image Link:</label>
-          <input type="text" name="imagem" id="imagem" />
+          <input required type="text" name="imagem" id="imagem" />
 
           <button id="btnCadastrar" type="submit">Register</button>
         </form>
@@ -46,10 +43,17 @@
 
         <form action="/update/<%= pokemon.id %>" method="POST">
           <label for="nome">Name:</label>
-          <input type="text" id="nome" name="nome" value="<%= pokemon.nome%>" />
+          <input
+            required
+            type="text"
+            id="nome"
+            name="nome"
+            value="<%= pokemon.nome%>"
+          />
 
           <label for="descricao">Description:</label>
           <input
+            required
             type="text"
             name="descricao"
             id="descricao"
@@ -57,10 +61,17 @@
           />
 
           <label for="tipo">Type:</label>
-          <input type="text" name="tipo" id="tipo" value="<%= pokemon.tipo%>" />
+          <input
+            required
+            type="text"
+            name="tipo"
+            id="tipo"
+            value="<%= pokemon.tipo%>"
+          />
 
           <label for="imagem">Image Link:</label>
           <input
+            required
             type="text"
             name="imagem"
             id="imagem"
@@ -88,11 +99,10 @@
     </main>
     <footer>
       <p>
-        <a href="https://github.com/magura13" target="_blank"
-          >My GitHub</a
-        >
+        <a href="https://github.com/magura13" target="_blank">My GitHub</a>
         - Copyright Sign &copy;
       </p>
     </footer>
+    <script src="/js/script.js"></script>
   </body>
 </html>
