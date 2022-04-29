@@ -1,3 +1,3 @@
 function cadastrado() {
-  alert("Pokemon cadastrado com sucesso!");
+  alert("Pokemon registered successfully!");
 };
